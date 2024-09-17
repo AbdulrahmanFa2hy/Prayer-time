@@ -15,6 +15,7 @@ import img1 from "../assets/img1.png";
 import img2 from "../assets/img2.jpg";
 import img3 from "../assets/img3.jpg";
 import img4 from "../assets/img4.jpg";
+import { Typography, useMediaQuery } from "@mui/material";
 moment.locale("ar");
 export default function MainContent() {
   // STATES
@@ -157,7 +158,7 @@ export default function MainContent() {
     setSelectedCity(cityObject);
   };
 
-  // const isMobile = useMediaQuery("(max-width:600px)");
+  const isMobile = useMediaQuery("(max-width:600px)");
 
   return (
     <>
@@ -165,15 +166,21 @@ export default function MainContent() {
       <Grid container>
         <Grid xs={6}>
           <div>
-            <h2>{today}</h2>
-            <h1>{selectedCity.displayName}</h1>
+            <Typography variant={isMobile ? "h6" : "h4"}>{today}</Typography>
+            <Typography variant={isMobile ? "h5" : "h3"}>
+              {selectedCity.displayName}
+            </Typography>
           </div>
         </Grid>
 
         <Grid xs={6}>
           <div>
-            <h2>متبقي حتى صلاة {prayersArray[nextPrayerIndex].displayName}</h2>
-            <h1>{remainingTime}</h1>
+            <Typography variant={isMobile ? "h6" : "h4"}>
+              متبقي حتى صلاة {prayersArray[nextPrayerIndex].displayName}
+            </Typography>
+            <Typography variant={isMobile ? "h5" : "h3"}>
+              {remainingTime}
+            </Typography>
           </div>
         </Grid>
       </Grid>
@@ -183,9 +190,9 @@ export default function MainContent() {
 
       {/* PRAYERS CARDS */}
       <Stack
-        // direction={isMobile ? "column" : "row"}
-        direction={"row"}
+        direction={isMobile ? "column" : "row"}
         justifyContent={"space-around"}
+        spacing={isMobile ? 3 : 0} // Add spacing between the cards in mobile view
         style={{ marginTop: "50px" }}
       >
         <Prayer name="الفجر" time={timings.Fajr} image={img} />
